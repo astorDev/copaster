@@ -1,0 +1,19 @@
+{
+  "identity": "SingleLineConsole.Template",
+  "name": "SingleLineConsole Template",
+  "shortName": "singlelineconsole",
+  "description": "A template for creating a single-line console application",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "include": [
+        "SingleLineConsole.cs"
+      ]
+    }
+  ]
+}
