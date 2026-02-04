@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dotnet-new", "dotnet-new", "{1EB758DD-7FDE-4FF2-E48D-3CF11F8603C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "play", "play", "{3EFC1B86-6A23-306F-713F-9ED52463CC35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Copaster.DotnetNew.Playground", "dotnet-new\play\Copaster.DotnetNew.Playground.csproj", "{F0886854-8C91-DB0E-4500-634823AD7A88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0886854-8C91-DB0E-4500-634823AD7A88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0886854-8C91-DB0E-4500-634823AD7A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0886854-8C91-DB0E-4500-634823AD7A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0886854-8C91-DB0E-4500-634823AD7A88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3EFC1B86-6A23-306F-713F-9ED52463CC35} = {1EB758DD-7FDE-4FF2-E48D-3CF11F8603C6}
+		{F0886854-8C91-DB0E-4500-634823AD7A88} = {3EFC1B86-6A23-306F-713F-9ED52463CC35}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {878C844A-A74C-487C-9132-6511F1E89B0B}
+	EndGlobalSection
+EndGlobal
