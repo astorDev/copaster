@@ -1,4 +1,6 @@
-﻿namespace Copaster.DotnetNew.Playground.Source;
+﻿global using Copaster.DotnetNew.Playground.Source;
+
+namespace Copaster.DotnetNew.Playground.Source;
 
 public static class SingleLineConsole
 {

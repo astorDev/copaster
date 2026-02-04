@@ -7,6 +7,30 @@
     "language": "C#",
     "type": "project"
   },
+  "sourceName" : "Copaster.DotnetNew.Playground.Source",
+  "preferNameDirectory" : true,
+  "postActions": [
+    {
+      "description": "Print message to ensure stuff is working",
+      "actionId" : "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2", // run script
+      "args": {
+        "executable": "echo",
+        "args": "\"Hello from Template postAction script\"",
+        "redirectStandardOutput": false,
+        "redirectStandardError": false
+      }
+    },
+    {
+      "description": "Open Scaffolded File",
+      "actionId" : "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2", // run script
+      "args": {
+        "executable": "code",
+        "args": "SingleLineConsole.cs",
+        "redirectStandardOutput": false,
+        "redirectStandardError": false
+      }
+    }
+  ],
   "sources": [
     {
       "source": "./",

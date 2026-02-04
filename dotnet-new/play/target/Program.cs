@@ -1,4 +1,3 @@
-using Copaster.DotnetNew.Playground.Source;
 using Copaster.DotnetNew.Playground.Target.Components;
 
 var builder = WebApplication.CreateBuilder(args);
