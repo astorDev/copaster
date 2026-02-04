@@ -2,8 +2,6 @@ using Copaster.DotnetNew.Playground.Target.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Logging.AddSingleLineConsole();
-
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();

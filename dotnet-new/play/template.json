@@ -1,0 +1,18 @@
+{
+  "identity": "<NAME>",
+  "name": "<NAME>",
+  "shortName": "<NAME>",
+  "description": "<NAME>",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName" : "Copaster.DotnetNew.Playground.Source",
+  "preferNameDirectory" : true,
+  "sources": [
+    {
+      "source": "./content",
+      "target": "./"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+- Install packages or SDKs
+    - Install packages in "smart" way (don't install if not really neede)
+-  
