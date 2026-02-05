@@ -14,3 +14,16 @@ reinstall:
 refresh:
 	make package
 	make reinstall
+
+run:
+	dotnet run
+
+dirty:
+	mkdir -p buffer
+	cp ../../Reactivity.cs buffer/Reactivity.cs
+	code buffer/Reactivity.cs
+
+play:
+	make dirty
+	dotnet run
+	code buffer/Reactivity.cs

@@ -1,4 +1,4 @@
-namespace target;
+namespace Copaster.Example;
 
 public interface IListenable
 {
