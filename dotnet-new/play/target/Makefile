@@ -15,3 +15,9 @@ delete:
 again:
 	make delete
 	make scaffold
+
+format:
+	dotnet format Copaster.DotnetNew.Playground.Target.csproj --severity info --verbosity diagnostic --exclude-diagnostics IDE0130
+
+format-with-ns:
+	dotnet format Copaster.DotnetNew.Playground.Target.csproj --severity info --verbosity diagnostic
