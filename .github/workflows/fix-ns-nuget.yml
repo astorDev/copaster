@@ -1,0 +1,17 @@
+name: Copaster.NamespaceFixer.Cli NuGet Publish
+on:
+  push:
+    paths:
+      - 'namespaces/cli/**'
+      - '.github/workflows/fix-ns-nuget.yaml'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Pack & Publish nuget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: astorDev/versy/calver/nuget@main
+        with:
+          project: namespaces/cli/Copaster.NamespaceFixer.Cli
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
