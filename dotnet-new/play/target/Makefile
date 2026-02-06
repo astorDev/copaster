@@ -1,6 +1,6 @@
-X ?= singlelineconsole
-IN ?= .
-F ?= SingleLineConsole.cs
+X ?= Reactivity.cs
+IN ?= buffer
+F ?= Reactivity.cs
 ALLOW-SCRIPTS ?= Yes
 
 scaffold:
@@ -9,7 +9,7 @@ scaffold:
 scaffold-simple:
 	dotnet new ${X} --output ${IN}
 
-delete:
+clean:
 	find . -name "${F}" -delete
 
 again:

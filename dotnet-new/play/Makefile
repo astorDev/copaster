@@ -12,6 +12,10 @@ template:
 	cp source/Makefile buffer/${F}/Makefile
 	sed -i '' 's/<NAME>/${F}/g' buffer/${F}/.template.config/template.json
 
+install:
+	make template
+	make -C buffer/${F} install
+
 file-forward:
 	make template
 	make -C buffer/${F} install
@@ -27,7 +31,7 @@ file-clean:
 	make remove-scaffolded
 
 remove-scaffolded:
-	rm -f target/${F}
+	rm -f target/buffer/${F}
 
 remove-buffer:
 	rm -rf buffer

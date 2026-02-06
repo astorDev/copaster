@@ -14,5 +14,17 @@
       "source": "./content",
       "target": "./"
     }
+  ],
+  "postActions": [
+    {
+      "description": "Fix Namespaces in Project (and for newly assigned files)",
+      "actionId" : "3A7C4B45-1F5D-4A30-959A-51B88E82B5D2", // run script
+      "args": {
+        "executable": "fix-ns",
+        "args": "",
+        "redirectStandardOutput": false,
+        "redirectStandardError": false
+      }
+    }
   ]
 }
