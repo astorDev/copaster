@@ -3,7 +3,7 @@ on:
   push:
     paths:
       - 'cli/**'
-      - '.github/workflows/cli-nuget.yaml'
+      - '.github/workflows/cli-nuget.yml'
   workflow_dispatch:
 
 jobs:
