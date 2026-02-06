@@ -1,4 +1,4 @@
-namespace Copaster.Example;
+namespace Copaster.Dump;
 
 // This is a simple file one can use to test copaster's functionality
 
