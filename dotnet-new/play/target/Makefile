@@ -4,7 +4,7 @@ F ?= Reactivity.cs
 ALLOW-SCRIPTS ?= Yes
 
 scaffold:
-	dotnet new ${X} --output ${IN} --allow-scripts ${ALLOW-SCRIPTS}
+	dotnet new ${X} --output ${IN} --allow-scripts ${ALLOW-SCRIPTS} --force
 
 scaffold-simple:
 	dotnet new ${X} --output ${IN}
