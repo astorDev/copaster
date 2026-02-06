@@ -14,7 +14,7 @@ public class ConsoleClient(ILogger<ConsoleClient> logger)
         var result = await CliWrap.Cli.Wrap(command)
             .WithArguments(args)
             .WithWorkingDirectory(from ?? Environment.CurrentDirectory)
-            .WithStandardOutputPipe(CliWrap.PipeTarget.ToDelegate(e => logger.LogInformation("Command output: {message}", e)))
+            .WithStandardOutputPipe(CliWrap.PipeTarget.ToDelegate(e => logger.LogTrace("Command output: {message}", e)))
             .WithStandardErrorPipe(CliWrap.PipeTarget.ToDelegate(e => logger.LogError("Command error: {error}", e)))
             .ExecuteAsync();
 

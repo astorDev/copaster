@@ -16,7 +16,7 @@ public class CopyCommand : Command
     public CopyCommand(
         AppFolder appFolder, 
         ILogger<CopyCommand> logger,
-        ConsoleClient consoleClient) : base("copy", "Copy a file to the application folder")
+        ConsoleClient consoleClient) : base("copy", "Copy the specified file as a smart template to the central registry")
     {
         this.logger = logger;
         this.appFolder = appFolder;

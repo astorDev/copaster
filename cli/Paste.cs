@@ -20,7 +20,7 @@ public class PasteCommand : Command
         Description = "The path where to paste the file. If not specified, the file will be pasted to the current directory."
     };
 
-    public PasteCommand(ILogger<CopyCommand> logger, ConsoleClient consoleClient) : base("paste", "Smart-Paste the file")
+    public PasteCommand(ILogger<CopyCommand> logger, ConsoleClient consoleClient) : base("paste", "Paste the specified file smart-template from the central registry")
     {
         this.logger = logger;
         this.consoleClient = consoleClient;
