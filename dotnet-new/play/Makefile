@@ -14,7 +14,7 @@ template:
 
 install:
 	make template
-	make -C buffer/${F} install
+	make -C buffer/${F} reinstall
 
 file-forward:
 	make template
