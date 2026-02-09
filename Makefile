@@ -37,3 +37,27 @@ clean:
 round:
 	make copy-reactivity
 	make repaste-reactivity
+
+fresh-buffer:
+	make remove-buffer
+	make create-buffer
+
+remove-buffer:
+	dotnet sln remove buffer
+	rm -rf buffer
+
+create-buffer:
+	dotnet new console --name Copaster.Buffer --output buffer
+	dotnet sln add buffer
+
+full-copaster-base:
+	make -C cli reinstall
+	make buf
+	make copy-copaster-base
+	make paste-copaster-base
+
+copy-copaster-base:
+	copaster copy cli/IO.cs,cli/TemplatePrototype.cs --name CopasterBase
+
+paste-copaster-base:
+	copaster paste CopasterBase --to buffer

@@ -5,9 +5,6 @@ namespace Copaster;
 
 public class PasteCommand : Command
 {
-    private readonly ILogger<CopyCommand> logger;
-    private readonly ConsoleClient consoleClient;
-
     static readonly Argument<string> PastedArgument = new(
         name: "pasted"
     );
@@ -17,14 +14,11 @@ public class PasteCommand : Command
     )
     {
         DefaultValueFactory = _ => Environment.CurrentDirectory,
-        Description = "The path where to paste the file. If not specified, the file will be pasted to the current directory."
+        Description = "The path where to paste the file(s). If not specified, the file(s) will be pasted to the current directory."
     };
 
-    public PasteCommand(ILogger<CopyCommand> logger, ConsoleClient consoleClient) : base("paste", "Paste the specified file smart-template from the central registry")
+    public PasteCommand(ILogger<PasteCommand> logger, ConsoleClient consoleClient) : base("paste", "Paste the specified file(s) smart-template from the central registry")
     {
-        this.logger = logger;
-        this.consoleClient = consoleClient;
-
         Add(PastedArgument);
         Add(ToOption);
 
@@ -33,16 +27,16 @@ public class PasteCommand : Command
             var pasted = parsed.GetRequiredValue(PastedArgument);
             var to = parsed.GetRequiredValue(ToOption);
             
-            logger.LogDebug("Using dotnet new template to resolve the file {file}", pasted);
+            logger.LogDebug("Using dotnet new template to resolve the smart template {name}", pasted);
 
             var result = await consoleClient.ExecuteAsync($"dotnet new {pasted} --output {to} --allow-scripts Yes --force");
             if (result.ExitCode != 0)
             {
-                logger.LogError("Failed to paste file {file} to {to} with exit code {code}", pasted, to, result.ExitCode);
+                logger.LogError("Failed to paste smart template {name} to {to} with exit code {code}", pasted, to, result.ExitCode);
             }
             else
             {
-                logger.LogInformation("File {file} pasted to {to}", pasted, to);
+                logger.LogInformation("Smart template {name} pasted to {to}", pasted, to);
             }
         });
     }
