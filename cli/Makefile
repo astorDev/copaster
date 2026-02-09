@@ -5,7 +5,7 @@ copy:
 
 install:
 	dotnet pack -c Release
-	dotnet tool install --global --add-source ./bin/Release Copaster.Cli
+	dotnet tool install --global --source ./bin/Release Copaster.Cli --allow-downgrade
 
 uninstall:
 	dotnet tool uninstall --global Copaster.Cli
