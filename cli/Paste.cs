@@ -14,10 +14,10 @@ public class PasteCommand : Command
     )
     {
         DefaultValueFactory = _ => Environment.CurrentDirectory,
-        Description = "The path where to paste the file(s). If not specified, the file(s) will be pasted to the current directory."
+        Description = "The path where to paste the smart template file(s) and folders. If not specified, the file(s) will be pasted to the current directory."
     };
 
-    public PasteCommand(ILogger<PasteCommand> logger, ConsoleClient consoleClient) : base("paste", "Paste the specified file(s) smart-template from the central registry")
+    public PasteCommand(ILogger<PasteCommand> logger, ConsoleClient consoleClient) : base("paste", "Paste the specified smart-template from the central registry")
     {
         Add(PastedArgument);
         Add(ToOption);
