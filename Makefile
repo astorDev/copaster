@@ -50,9 +50,12 @@ create-buffer:
 	dotnet new console --name Copaster.Buffer --output buffer
 	dotnet sln add buffer
 
-full-copaster-base:
+reinstall-cli:
 	make -C cli reinstall
-	make buf
+
+full-copaster-base:
+	make reinstall-cli
+	make fresh-buffer
 	make copy-copaster-base
 	make paste-copaster-base
 
@@ -61,3 +64,10 @@ copy-copaster-base:
 
 paste-copaster-base:
 	copaster paste CopasterBase --to buffer
+
+full-letters:
+	make reinstall-cli
+	make fresh-buffer
+	copaster remove Letters
+	copaster copy play/Letters
+	copaster paste Letters --to buffer/Letters

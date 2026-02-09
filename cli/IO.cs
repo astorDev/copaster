@@ -3,6 +3,25 @@ namespace Copaster;
 public record Folder(string Path)
 {
     public string Name => System.IO.Path.GetFileName(Path);
+    public File[] ImmediateFiles => [.. Directory.GetFiles(Path).Select(f => new File(f))];
+
+    public IEnumerable<File> AllFiles
+    {
+        get
+        {
+            foreach (var file in ImmediateFiles)
+            {
+                yield return file;
+            }
+            foreach (var subfolder in Subfolders)
+            {
+                foreach (var file in subfolder.AllFiles)
+                {
+                    yield return file;
+                }
+            }
+        }
+    }
 
     public Folder EnsureExists()
     {

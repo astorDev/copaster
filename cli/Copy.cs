@@ -9,7 +9,7 @@ public class CopyCommand : Command
         name: "source"
     )
     {
-        Description = "The file(s) to copy as a template. For multiple files, separate paths with a comma."
+        Description = "Name of the folder or file(s) to copy as a smart template. For multiple files, separate paths with a comma."
     };
 
     static readonly Option<string> TemplateNameOption = new(
@@ -27,7 +27,7 @@ public class CopyCommand : Command
     public CopyCommand(
         AppFolder appFolder, 
         ILogger<CopyCommand> logger,
-        ConsoleClient consoleClient) : base("copy", "Copy the specified file(s) as a smart template to the central registry")
+        ConsoleClient consoleClient) : base("copy", "Copy the specified folder or file(s) as a smart template to the central registry")
     {
         this.logger = logger;
         this.appFolder = appFolder;
@@ -70,11 +70,7 @@ public class CopyCommand : Command
         logger.LogTrace("Creating template content folder {folder}", contentFolder.Path);
         contentFolder.EnsureExists();
 
-        foreach (var file in source.Files)
-        {
-            logger.LogTrace("Copying file {file} to template content folder {folder}", file.Path, contentFolder.Path);
-            contentFolder.AcceptCopyOf(file);
-        }
+        CopyContent(contentFolder, source);
 
         var templateConfig = templateFolder.Subfolder(".template.config");
         logger.LogTrace("Creating template config folder {folder}", templateConfig.Path);
@@ -86,6 +82,45 @@ public class CopyCommand : Command
 
         logger.LogInformation("Template folder generated at {folder}", templateFolder.Path);
         return templateFolder;
+    }
+
+    void CopyContent(Folder contentFolder, CopySource source)
+    {
+        if (source.Folder != null)
+        {
+            foreach (var file in source.Folder.AllFiles)
+            {
+                var targetFolder = GetTargetFolder(file, source.Folder, contentFolder);
+                logger.LogTrace("Copying file {file} to template content folder {folder}", file.Path, targetFolder.Path);
+                targetFolder.EnsureExists();
+                targetFolder.AcceptCopyOf(file);
+            }
+
+            return;
+        }
+
+        if (source.Files == null)
+        {
+            throw new InvalidOperationException("Source must have either a folder or files");
+        }
+
+        foreach (var file in source.Files)
+        {
+            logger.LogTrace("Copying file {file} to template content folder {folder}", file.Path, contentFolder.Path);
+            contentFolder.AcceptCopyOf(file);
+        }
+    }
+
+    Folder GetTargetFolder(File copied, Folder sourceFolder, Folder contentFolder)
+    {
+        var fileDirectoryName = Path.GetDirectoryName(copied.Path) ?? "";
+        if (fileDirectoryName != sourceFolder.Path)
+        {
+            var additionalNesting = fileDirectoryName.Replace(sourceFolder.Path, "");
+            return contentFolder.Subfolder(additionalNesting.Trim(Path.DirectorySeparatorChar));
+        }
+
+        return contentFolder;
     }
 
     async Task InstallTemplate(Folder templateFolder)
@@ -105,7 +140,7 @@ public class CopyCommand : Command
     }
 }
 
-public record CopySource(File[] Files)
+public record CopySource(File[]? Files, Folder? Folder)
 {
     public static CopySource Parse(string input)
     {
@@ -113,13 +148,22 @@ public record CopySource(File[] Files)
             .Select(path => new File(path.Trim()))
             .ToArray();
 
-        return new CopySource(files);
+        if (files.Length == 1)
+        {
+            if (String.IsNullOrEmpty(Path.GetExtension(files[0].Path)))
+            {
+                return new CopySource(null, new Folder(files[0].Path));
+            }
+        }
+
+        return new CopySource(files, null);
     }
 
     public string GetTemplateName(string? name)
     {
         if (name != null) return name;
-        if (Files.Length == 1) return Files[0].Name;
+        if (Folder != null) return Folder.Name;
+        if (Files?.Length == 1) return Files[0].Name;
 
         throw new("Name must be provided when copying multiple files");
     }
