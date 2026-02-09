@@ -9,6 +9,14 @@ public class CopyCommand : Command
         name: "source"
     );
 
+    static readonly Option<string> TemplateNameOption = new(
+        name: "--name",
+        aliases: ["-n"]
+    )
+    {
+        Description = "The name of the template to be created. If not specified, the file name will be used."
+    };
+
     private readonly ILogger<CopyCommand> logger;
     private readonly AppFolder appFolder;
     private readonly ConsoleClient consoleClient;
@@ -23,23 +31,35 @@ public class CopyCommand : Command
         this.consoleClient = consoleClient;
     
         Add(SourceFileArgument);
+        Add(TemplateNameOption);
 
         SetAction(async (parsed) =>
         {
             var sourceFilePath = parsed.GetRequiredValue(SourceFileArgument);
+            var templateName = parsed.GetValue(TemplateNameOption);
 
-            var templateFolder = GenerateTemplateFolder(sourceFilePath);
-            await InstallTemplate(templateFolder);
+            var templateFolder = GenerateTemplateFolder(sourceFilePath, templateName);
+
+            try
+            {
+                await InstallTemplate(templateFolder);
+            }
+            catch (Exception)
+            {
+                logger.LogDebug("Cleaning up template folder {folder} due to error during installation", templateFolder.Path);
+                templateFolder.Delete();
+            }
         });
     }
 
-    Folder GenerateTemplateFolder(string sourceFilePath)
+    Folder GenerateTemplateFolder(string sourceFilePath, string? templateName)
     {
-        logger.LogDebug("Generating template folder for file {file}", sourceFilePath);
+        logger.LogDebug("Generating template folder for file {file}, with passed template name: {templateName}", sourceFilePath, templateName);
 
         var fileName = Path.GetFileName(sourceFilePath);
+        templateName ??= fileName;
 
-        var templateFolder = appFolder.Subfolder(fileName);
+        var templateFolder = appFolder.Subfolder(templateName);
         logger.LogTrace("Creating template folder {folder}", templateFolder.Path);
         templateFolder.EnsureExists();
 
@@ -55,8 +75,8 @@ public class CopyCommand : Command
         templateConfig.EnsureExists();
 
         var templateConfigFile = templateConfig.File("template.json");
-        logger.LogTrace("Filling {file} from template prototype and replacing {placeholder} to {replacement}", templateConfigFile.Path, "<NAME>", fileName);
-        templateConfigFile.UseContent(TemplatePrototype.Json).UseReplacement("<NAME>", fileName).Save();
+        logger.LogTrace("Filling {file} from template prototype and replacing {placeholder} to {replacement}", templateConfigFile.Path, "<NAME>", templateName);
+        templateConfigFile.UseContent(TemplatePrototype.Json).UseReplacement("<NAME>", templateName).Save();
 
         logger.LogInformation("Template folder generated at {folder}", templateFolder.Path);
         return templateFolder;

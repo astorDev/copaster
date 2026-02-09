@@ -13,7 +13,9 @@ var services = new ServiceCollection()
     .AddAppFolder("Copaster")
     .AddSingleton<CopyCommand>()
     .AddSingleton<PasteCommand>()
+    .AddSingleton<RemoveCommand>()
     .AddSingleton<ConsoleClient>()
+    .AddSingleton<ListCommand>()
     .BuildServiceProvider();
 
 var logger = services.GetRequiredService<ILogger<Program>>();
@@ -27,7 +29,9 @@ foreach (var hostedService in hostedServices)
 var rootCommand = new RootCommand("Copaster CLI")
 {
     services.GetRequiredService<CopyCommand>(),
-    services.GetRequiredService<PasteCommand>()
+    services.GetRequiredService<PasteCommand>(),
+    services.GetRequiredService<RemoveCommand>(),
+    services.GetRequiredService<ListCommand>()
 };
 
 await rootCommand.Parse(args).InvokeAsync();

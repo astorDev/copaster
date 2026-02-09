@@ -2,6 +2,8 @@ namespace Copaster;
 
 public record Folder(string Path)
 {
+    public string Name => System.IO.Path.GetFileName(Path);
+
     public Folder EnsureExists()
     {
         Directory.CreateDirectory(Path);
@@ -27,6 +29,13 @@ public record Folder(string Path)
         var filePath = System.IO.Path.Combine(Path, fileName);
         return new File(filePath);
     }
+
+    public void Delete()
+    {
+        Directory.Delete(Path, recursive: true);
+    }
+
+    public IEnumerable<Folder> Subfolders => Directory.GetDirectories(Path).Select(d => new Folder(d));
 }
 
 public record File(string Path)

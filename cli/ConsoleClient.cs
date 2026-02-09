@@ -4,7 +4,7 @@ namespace Copaster;
 
 public class ConsoleClient(ILogger<ConsoleClient> logger)
 {
-    public async Task<CliWrap.CommandResult> ExecuteAsync(string fullCommand, string from = null)
+    public async Task<CliWrap.CommandResult> ExecuteAsync(string fullCommand, string? from = null)
     {
         var command = fullCommand.Split(' ')[0];
         var args = fullCommand[command.Length..].Trim();
