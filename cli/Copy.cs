@@ -7,14 +7,17 @@ public class CopyCommand : Command
 {
     static readonly Argument<string> SourceFileArgument = new(
         name: "source"
-    );
+    )
+    {
+        Description = "The file(s) to copy as a template. For multiple files, separate paths with a comma."
+    };
 
     static readonly Option<string> TemplateNameOption = new(
         name: "--name",
         aliases: ["-n"]
     )
     {
-        Description = "The name of the template to be created. If not specified, the file name will be used."
+        Description = "The name of the template to be created. Required when copying multiple files."
     };
 
     private readonly ILogger<CopyCommand> logger;
@@ -24,7 +27,7 @@ public class CopyCommand : Command
     public CopyCommand(
         AppFolder appFolder, 
         ILogger<CopyCommand> logger,
-        ConsoleClient consoleClient) : base("copy", "Copy the specified file as a smart template to the central registry")
+        ConsoleClient consoleClient) : base("copy", "Copy the specified file(s) as a smart template to the central registry")
     {
         this.logger = logger;
         this.appFolder = appFolder;
@@ -35,10 +38,11 @@ public class CopyCommand : Command
 
         SetAction(async (parsed) =>
         {
-            var sourceFilePath = parsed.GetRequiredValue(SourceFileArgument);
+            var sourceRaw = parsed.GetRequiredValue(SourceFileArgument);
+            var source = CopySource.Parse(sourceRaw);
             var templateName = parsed.GetValue(TemplateNameOption);
 
-            var templateFolder = GenerateTemplateFolder(sourceFilePath, templateName);
+            var templateFolder = GenerateTemplateFolder(source, templateName);
 
             try
             {
@@ -52,12 +56,11 @@ public class CopyCommand : Command
         });
     }
 
-    Folder GenerateTemplateFolder(string sourceFilePath, string? templateName)
+    Folder GenerateTemplateFolder(CopySource source, string? templateName)
     {
-        logger.LogDebug("Generating template folder for file {file}, with passed template name: {templateName}", sourceFilePath, templateName);
+        logger.LogDebug("Generating template folder for file {file}, with passed template name: {templateName}", source, templateName);
 
-        var fileName = Path.GetFileName(sourceFilePath);
-        templateName ??= fileName;
+        templateName = source.GetTemplateName(templateName);
 
         var templateFolder = appFolder.Subfolder(templateName);
         logger.LogTrace("Creating template folder {folder}", templateFolder.Path);
@@ -67,8 +70,11 @@ public class CopyCommand : Command
         logger.LogTrace("Creating template content folder {folder}", contentFolder.Path);
         contentFolder.EnsureExists();
 
-        logger.LogTrace("Copying file {file} to template content folder {folder}", sourceFilePath, contentFolder.Path);
-        contentFolder.AcceptCopyOf(sourceFilePath);
+        foreach (var file in source.Files)
+        {
+            logger.LogTrace("Copying file {file} to template content folder {folder}", file.Path, contentFolder.Path);
+            contentFolder.AcceptCopyOf(file);
+        }
 
         var templateConfig = templateFolder.Subfolder(".template.config");
         logger.LogTrace("Creating template config folder {folder}", templateConfig.Path);
@@ -96,5 +102,25 @@ public class CopyCommand : Command
         {
             logger.LogInformation("Template installed from folder {folder}", templateFolder.Path);
         }
+    }
+}
+
+public record CopySource(File[] Files)
+{
+    public static CopySource Parse(string input)
+    {
+        var files = input.Split(',', StringSplitOptions.RemoveEmptyEntries)
+            .Select(path => new File(path.Trim()))
+            .ToArray();
+
+        return new CopySource(files);
+    }
+
+    public string GetTemplateName(string? name)
+    {
+        if (name != null) return name;
+        if (Files.Length == 1) return Files[0].Name;
+
+        throw new("Name must be provided when copying multiple files");
     }
 }

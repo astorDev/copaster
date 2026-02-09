@@ -24,6 +24,13 @@ public record Folder(string Path)
         return new File(destinationPath);
     }
 
+    public File AcceptCopyOf(File sourceFile)
+    {
+        var destinationPath = System.IO.Path.Combine(Path, sourceFile.Name);
+        System.IO.File.Copy(sourceFile.Path, destinationPath, overwrite: true);
+        return new File(destinationPath);
+    }
+
     public File File(string fileName)
     {
         var filePath = System.IO.Path.Combine(Path, fileName);
@@ -45,6 +52,8 @@ public record File(string Path)
     {
         get => _content ??= System.IO.File.ReadAllText(Path);
     }
+
+    public string Name => System.IO.Path.GetFileName(Path);
 
     public File UseContent(string content)
     {
