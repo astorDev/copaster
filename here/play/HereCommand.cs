@@ -1,4 +1,5 @@
 using System.CommandLine;
+using System.Text.Json;
 
 namespace Copaster;
 
@@ -38,9 +39,20 @@ public class HereCommand : Command
             var fromFolder = new Folder(from);
             var toFolder = new Folder(to);
 
+            var settingsFile = fromFolder.File(HereSettings.FileName);
+            if (!settingsFile.Exists) throw new($"Settings file not found at {settingsFile.Path}");
+            var settings = JsonSerializer.Deserialize<HereSettings>(settingsFile.Content, JsonSerializerOptions.Web) ?? throw new($"Failed to deserialize settings from {settingsFile.Path}");
+
             logger.LogInformation("Copying from {from} to {to}", from, to);
             
-            toFolder.EnsureExists().AcceptCopyOf(fromFolder);
+            toFolder.EnsureExists().AcceptCopyOf(fromFolder, settings.Skip);
         });
     }
+}
+
+public class HereSettings
+{
+    public const string FileName = "copaster.json";
+
+    public string[]? Skip { get; set; }
 }

@@ -1,3 +1,7 @@
+using GlobExpressions;
+using Microsoft.Extensions.FileSystemGlobbing;
+using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
+
 namespace Copaster;
 
 public record Folder(string Path)
@@ -50,17 +54,18 @@ public record Folder(string Path)
         return new File(destinationPath);
     }
 
-    public void AcceptCopyOf(Folder sourceFolder)
+    public void AcceptCopyOf(Folder sourceFolder, string[]? skip = null)
     {
-        foreach (var file in sourceFolder.ImmediateFiles)
+        var ignore = IgnoreCollection.From(skip);
+        foreach (var file in sourceFolder.ImmediateFiles.Where(f => !ignore.IsIgnored(f)))
         {
-            this.AcceptCopyOf(file);
+            AcceptCopyOf(file);
         }
         
-        foreach (var subfolder in sourceFolder.Subfolders)
+        foreach (var subfolder in sourceFolder.Subfolders.Where(f => !ignore.IsIgnored(f)))
         {
             var destinationSubfolder = Subfolder(subfolder.Name);
-            destinationSubfolder.AcceptCopyOf(subfolder);
+            destinationSubfolder.AcceptCopyOf(subfolder, skip);
         }
     }
 
@@ -76,4 +81,21 @@ public record Folder(string Path)
     }
 
     public IEnumerable<Folder> Subfolders => Directory.GetDirectories(Path).Select(d => new Folder(d));
+}
+
+public record CopyResult
+{
+    public int FilesCopied { get; init; }
+    public int FilesSkipped { get; init; }
+}
+
+public record GlobCollection(Glob[] Items)
+{
+    public bool IsMatch(string filePath)
+    {
+        return Items.Any(g => g.IsMatch(filePath));
+    }
+
+    public static GlobCollection From(IEnumerable<Glob>? globs) => new(globs?.ToArray() ?? []);
+    public IEnumerable<File> Unmatched(IEnumerable<File> files) => files.Where(f => !IsMatch(f.Path));
 }

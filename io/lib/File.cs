@@ -10,6 +10,8 @@ public record File(string Path)
 
     public string Name => System.IO.Path.GetFileName(Path);
 
+    public bool Exists => System.IO.File.Exists(Path);
+
     public File UseContent(string content)
     {
         _content = content;

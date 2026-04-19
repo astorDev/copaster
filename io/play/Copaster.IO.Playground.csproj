@@ -4,7 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>Copaster.Here.Playground</RootNamespace>
+    <RootNamespace>Copaster.IO.Playground</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,14 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.6" />
-    <PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="10.0.6" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.6" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.6" />
+    <PackageReference Include="Glob" Version="1.1.9" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
     <PackageReference Include="MSTest" Version="3.9.1" />
     <PackageReference Include="Shouldly" Version="4.3.0" />
-    <PackageReference Include="System.CommandLine" Version="2.0.6" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\io\lib\Copaster.IO.csproj" />
+    <ProjectReference Include="..\lib\Copaster.IO.csproj" />
   </ItemGroup>
 
 </Project>

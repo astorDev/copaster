@@ -5,11 +5,10 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:51639",
+      "applicationUrl": "http://localhost:1591",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "commandLineArgs": "here --from=../../../lit --to=../../../../$(FEAT)/lit"
+      }
     }
   }
 }
