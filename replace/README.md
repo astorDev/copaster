@@ -16,3 +16,8 @@ replace -f <folder-path | . > <from> <to>
 
 For simple and curated test of the application use recipes from Makefile in the root of the app.
 Use `make forth` command to replace symbols in example folder and inspect results and `make back` to rollback the changes.
+
+## Coding Guidelines
+
+- Comments are considered Red Flag: If comment explains what a line or block does - that means the . Comments CAN explain WHY, but most of the time instead of explaining the WHY the code can be rewritten in the way, that why is self-explanatory.
+- ALWAYS strive to use a package for common functionality, especially for something that is not strictly project-specific
