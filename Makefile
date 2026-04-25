@@ -1,17 +1,33 @@
+cli-install:
+	make -C cli install
+
+copy-reactivity:
+	copaster copy play/Reactivity.cs 
+
+paste-reactivity:
+	copaster paste Reactivity.cs --to buffer
+
+copy-a-ending:
+	copaster copy play/Letters/A.cs,play/Letters/C/CA.cs --name a-ending
+
+buffer-proj:
+	dotnet new classlib -o buffer --name Copaster.Buffer 
+
+no-buffer:
+	rm -rf buffer
+
+
 uninstall-fix-ns:
 	make -C namespaces/cli uninstall
 
 install-fix-ns:
 	make -C namespaces/cli install
 
-cli-install:
+cli-reinstall:
 	make -C cli reinstall
 
-copy-reactivity:
-	make -C dotnet-new/play install
-
-paste-reactivity:
-	make -C dotnet-new/play/target scaffold
+cli-uninstall:
+	make -C cli uninstall
 
 copy-io:
 	make -C cli copy-io
@@ -50,11 +66,8 @@ create-buffer:
 	dotnet new console --name Copaster.Buffer --output buffer
 	dotnet sln add buffer
 
-reinstall-cli:
-	make -C cli reinstall
-
 full-copaster-base:
-	make reinstall-cli
+	make cli-reinstall
 	make fresh-buffer
 	make copy-copaster-base
 	make paste-copaster-base
@@ -66,7 +79,7 @@ paste-copaster-base:
 	copaster paste CopasterBase --to buffer
 
 full-letters:
-	make reinstall-cli
+	make cli-reinstall
 	make fresh-buffer
 	copaster remove Letters
 	copaster copy play/Letters
