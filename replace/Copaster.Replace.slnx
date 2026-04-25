@@ -1,0 +1,4 @@
+<Solution>
+    <Project Path="cli/Copaster.Replace.Cli.csproj" />
+    <Project Path="lib/Copaster.Replace.csproj" />
+</Solution>
