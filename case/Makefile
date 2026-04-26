@@ -1,22 +1,27 @@
 Input ?= InputValue
 
+.PHONY: cameled dotted kebabed pascaled snaked trained upsnaked
+
 cameled:
-	dotnet run cameled -- $(INPUT)
+	dotnet run --project cameled -- $(Input)
 
 dotted:
-	dotnet run dotted -- $(INPUT)
+	dotnet run --project dotted -- $(Input)
 
 kebabed:
-	dotnet run kebabed -- $(INPUT)
+	dotnet run --project kebabed -- $(Input)
 
 pascaled:
-	dotnet run pascaled -- $(INPUT)
+	dotnet run --project pascaled -- $(Input)
 
 snaked:
-	dotnet run snaked -- $(INPUT)
+	dotnet run --project snaked -- $(Input)
 
 trained:
-	dotnet run trained -- $(INPUT)
+	dotnet run --project trained -- $(Input)
 
 upsnaked:
-	dotnet run upsnaked -- $(INPUT)
+	dotnet run --project upsnaked -- $(Input)
+
+all:
+	make cameled && make dotted && make kebabed && make pascaled && make snaked && make trained && make upsnaked
