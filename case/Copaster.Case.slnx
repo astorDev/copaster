@@ -1,0 +1,12 @@
+<Solution>
+    <Project Path="lib/Copaster.Case.csproj" />
+  <Folder Name="/utils/">
+    <Project Path="cameled/Copaster.Case.Cameled.csproj" />
+    <Project Path="dotted/Copaster.Case.Dotted.csproj" />
+    <Project Path="kebabed/Copaster.Case.Kebabed.csproj" />
+    <Project Path="pascaled/Copaster.Case.Pascaled.csproj" />
+    <Project Path="snaked/Copaster.Case.Snaked.csproj" />
+    <Project Path="trained/Copaster.Case.Trained.csproj" />
+    <Project Path="upsnaked/Copaster.Case.Upsnaked.csproj" />
+  </Folder>
+</Solution>
