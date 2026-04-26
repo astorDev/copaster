@@ -2,9 +2,11 @@
 
 - No Comments
 - No method more then 10 lines
-- Use `Microsoft.CommandLine` package for implementing command line utils. Example:
+- Use `System.CommandLine` package for implementing command line utils, following this example:
 
 ```csharp
+// using System.CommandLine
+
 Option<FileInfo> fileOption = new("--file")
 {
     Description = "The file to read and display on the console"
