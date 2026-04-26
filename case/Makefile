@@ -1,27 +1,28 @@
-Input ?= InputValue
+INPUT ?= InputValue
+PROJECT ?= cameled
+PROJECTS ?= cameled dotted kebabed pascaled snaked trained upsnaked
 
-.PHONY: cameled dotted kebabed pascaled snaked trained upsnaked
+run:
+	dotnet run --project $(PROJECT) -- $(INPUT)
 
-cameled:
-	dotnet run --project cameled -- $(Input)
+install:
+	dotnet pack $(PROJECT)
+	dotnet tool install --global --add-source $(PROJECT)/bin/Release copaster.case.$(PROJECT)
 
-dotted:
-	dotnet run --project dotted -- $(Input)
+uninstall:
+	dotnet tool uninstall --global copaster.case.$(PROJECT)
 
-kebabed:
-	dotnet run --project kebabed -- $(Input)
+run-installed:
+	$(PROJECT) $(INPUT)
 
-pascaled:
-	dotnet run --project pascaled -- $(Input)
+run-all:
+	for project in $(PROJECTS); do make run PROJECT=$$project; done
 
-snaked:
-	dotnet run --project snaked -- $(Input)
+install-all:
+	for project in $(PROJECTS); do make install PROJECT=$$project; done
 
-trained:
-	dotnet run --project trained -- $(Input)
+uninstall-all:
+	for project in $(PROJECTS); do make uninstall PROJECT=$$project; done
 
-upsnaked:
-	dotnet run --project upsnaked -- $(Input)
-
-all:
-	make cameled && make dotted && make kebabed && make pascaled && make snaked && make trained && make upsnaked
+run-installed-all:
+	for project in $(PROJECTS); do make run-installed PROJECT=$$project; done

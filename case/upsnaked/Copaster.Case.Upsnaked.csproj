@@ -15,6 +15,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>Copaster</RootNamespace>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>upsnaked</ToolCommandName>
+    <PackageId>Copaster.Case.Upsnaked</PackageId>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
 </Project>

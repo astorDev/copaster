@@ -15,6 +15,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>Copaster</RootNamespace>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>pascaled</ToolCommandName>
+    <PackageId>Copaster.Case.Pascaled</PackageId>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
 </Project>
