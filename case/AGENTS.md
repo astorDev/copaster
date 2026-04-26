@@ -2,6 +2,7 @@
 
 - No Comments
 - No method more then 10 lines
+- No double nesting (no if inside a loop for example). Extract in dedicated method instead.
 - Use `System.CommandLine` package for implementing command line utils, following this example:
 
 ```csharp
