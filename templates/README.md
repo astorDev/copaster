@@ -1,10 +1,10 @@
 # Copaster Templates
 
-In the module templates for various project types are stored. 
-All templates follow similar base rule:
+This module contains templates for various project types.
+All templates follow a similar set of base rules:
 
-- They have `Makefile` with commonly used end-to-end commands to perform commonly used action.
-- They have `README.md` in the root, with `Getting Started` section describing the most common actions. 
+- They have a `Makefile` with end-to-end commands for common actions.
+- They have a `README.md` in the root, with a `Getting Started` section describing the most common actions.
 - They have `.gitignore` excluding files and folders specific to the project type. 
 - They try to follow as flat structure as possible, hence put code in the root of the repo.
 - They try to make you delete as little code as possible after scaffolding - for that they:
