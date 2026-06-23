@@ -1,0 +1,19 @@
+{
+  "name": "template",
+  "publisher": "template",
+  "displayName": "Template",
+  "description": "Template VS Code Extension",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.125.0"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "devDependencies": {
+    "@types/vscode": "^1.125.0",
+    "@vscode/vsce": "^3.9.2",
+    "typescript": "^6.0.3"
+  }
+}
