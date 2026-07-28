@@ -3,3 +3,4 @@ obj/
 buffer/
 node_modules/
 .DS_Store
+*inbox.*
