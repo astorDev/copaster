@@ -1,5 +1,5 @@
 # Copy Util
 
-Copies files and folder to global buffer/registry. In case of folder copying, the util ignores 
+Copies files and folders to the global buffer/registry.
 
 > 🚧 Under Construction
