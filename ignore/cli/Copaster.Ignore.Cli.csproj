@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>copaster.ignore</ToolCommandName>
+    <ToolCommandName>copaster-ignore</ToolCommandName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,8 +15,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\io\lib\Copaster.IO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="System.CommandLine" />
     <Using Include="NiceShell" />
+    <Using Include="Copaster" />
   </ItemGroup>
 
 </Project>

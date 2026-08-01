@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-ignore-cli",
+            "type": "shell",
+            "command": "dotnet",
+            "args": [
+                "build",
+                "${workspaceFolder}/ignore/cli/Copaster.Ignore.Cli.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

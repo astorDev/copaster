@@ -1,0 +1,17 @@
+name: Copaster.Ignore.Cli NuGet Publish
+on:
+  push:
+    paths:
+      - 'ignore/cli/**'
+      - '.github/workflows/ignore-cli-nuget.yml'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Pack & Publish nuget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: astorDev/versy/calver/nuget@main
+        with:
+          project: ignore/cli/Copaster.Ignore.Cli
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}

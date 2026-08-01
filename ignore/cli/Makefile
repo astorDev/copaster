@@ -1,4 +1,4 @@
-ARGS ?= copaster.ignore . --name John
+ARGS ?= remaining .
 
 run:
 	dotnet run -- $(ARGS)
