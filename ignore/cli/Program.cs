@@ -1,10 +1,8 @@
-﻿//global using Console = NiceShell.Console;
-
-var builder = new CliBuilder();
+﻿var builder = new CliBuilder();
 
 builder.Logging.AddNiceShell();
 
-builder.AddCommand<Copaster.IgnoreCommand>();
+builder.AddCommand<RemainingCommand>();
 
 using var app = builder.Build("A copaster.ignore CLI application.");
 
