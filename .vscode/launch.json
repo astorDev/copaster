@@ -1,0 +1,16 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug ignore/cli",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-ignore-cli",
+            "program": "${workspaceFolder}/ignore/cli/bin/Debug/net10.0/Copaster.Ignore.Cli.dll",
+            "args": ["remaining", "."],
+            "cwd": "${workspaceFolder}/ignore/cli",
+            "console": "internalConsole",
+            "stopAtEntry": false
+        }
+    ]
+}

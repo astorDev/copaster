@@ -1,11 +1,19 @@
 using GlobExpressions;
-using Microsoft.Extensions.FileSystemGlobbing;
-using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 
 namespace Copaster;
 
 public record Folder(string Path)
 {
+    public Folder? Parent
+    {
+        get
+        {
+            var thisDir = new DirectoryInfo(Path);
+            var parentDir = thisDir.Parent;
+            return parentDir is null ? null : new Folder(parentDir.FullName);
+        }
+    }
+
     public string Name => System.IO.Path.GetFileName(Path);
     public File[] ImmediateFiles => [.. Directory.GetFiles(Path).Select(f => new File(f))];
 
