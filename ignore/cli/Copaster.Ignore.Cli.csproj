@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>copaster.ignore</ToolCommandName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NiceShell.Cli" Version="2026.108.101.3-cli-copaster.ignore-using-core-lib" />
+    <PackageReference Include="NiceShell.Logger" Version="2026.108.101.2-cli-copaster.ignore-using-core-lib" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="System.CommandLine" />
+    <Using Include="NiceShell" />
+  </ItemGroup>
+
+</Project>
