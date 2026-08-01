@@ -26,9 +26,10 @@ public class RemainingCommand : Command
 
         var remaining = logic.GetRemainingFiles(folder);
         
-        var filenamesToPrint = remaining.Select(f => Path.GetRelativePath(folder.Path, f.Path));
-
-        filenamesToPrint.ToList().ForEach(Console.WriteLine);
+        foreach (var filename in remaining.Select(f => Path.GetRelativePath(folder.Path, f.Path)))
+        {
+            Console.WriteLine(filename);
+        }
     }
 
     public class Logic(ILogger<Logic> logger)

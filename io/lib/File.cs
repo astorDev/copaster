@@ -8,10 +8,10 @@ public record File(string Path)
         get => _content ??= System.IO.File.ReadAllText(Path);
     }
 
-    public IEnumerable<string>? lines;
+    private IEnumerable<string>? _lines;
     public IEnumerable<string> Lines
     {
-        get => lines ??= System.IO.File.ReadLines(Path);
+        get => _lines ??= System.IO.File.ReadLines(Path);
     }
 
     public string Name => System.IO.Path.GetFileName(Path);
