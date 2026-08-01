@@ -9,7 +9,9 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>copaster</ToolCommandName>
   </PropertyGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\io\lib\Copaster.IO.csproj" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CliWrap" Version="3.10.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.2" />
