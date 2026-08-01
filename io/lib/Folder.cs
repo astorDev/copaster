@@ -35,6 +35,8 @@ public record Folder(string Path)
         }
     }
 
+    public bool Exists => Directory.Exists(Path);
+
     public Folder EnsureExists()
     {
         Directory.CreateDirectory(Path);
@@ -86,6 +88,19 @@ public record Folder(string Path)
     public void Delete()
     {
         Directory.Delete(Path, recursive: true);
+    }
+
+    public void Clean()
+    {
+        foreach (var file in ImmediateFiles)
+        {
+            System.IO.File.Delete(file.Path);
+        }
+
+        foreach (var subfolder in Subfolders)
+        {
+            subfolder.Delete();
+        }
     }
 
     public IEnumerable<Folder> Subfolders => Directory.GetDirectories(Path).Select(d => new Folder(d));

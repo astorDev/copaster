@@ -8,7 +8,9 @@
 
   <ItemGroup>
     <PackageReference Include="Glob" Version="1.1.9" />
-    <PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="10.0.6" />
+    <!-- <PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="10.0.6" /> -->
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.10" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="10.0.10" />
   </ItemGroup>
 
 </Project>

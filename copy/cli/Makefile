@@ -1,4 +1,4 @@
-ARGS ?= toregistry . --name John
+ARGS ?= toregistry .
 
 run:
 	dotnet run -- $(ARGS)
