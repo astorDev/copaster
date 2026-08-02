@@ -4,7 +4,7 @@ public class CopyCommand : Command
 {
     private readonly Option<string> nameOption = new("--name")
     {
-        Description = "The name to use when copying a folder. Required for folder copy mode.",
+        Description = "The destination registry folder name. Defaults to the source file/folder name.",
         Required = false
     };
 
