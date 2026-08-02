@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>copaster-copy</ToolCommandName>
+    <RootNamespace>Copaster</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NiceShell.Cli" Version="2026.108.101.3-cli-copaster.copy-using-core-lib" />
+    <PackageReference Include="NiceShell.Logger" Version="2026.108.101.2-cli-copaster.copy-using-core-lib" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="System.CommandLine" />
+    <Using Include="NiceShell" />
+    <Using Include="Copaster" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ignore\cli\Copaster.Ignore.Cli.csproj" />
+  </ItemGroup>
+
+</Project>

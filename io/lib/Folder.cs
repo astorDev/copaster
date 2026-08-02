@@ -35,6 +35,8 @@ public record Folder(string Path)
         }
     }
 
+    public bool Exists => Directory.Exists(Path);
+
     public Folder EnsureExists()
     {
         Directory.CreateDirectory(Path);
@@ -43,7 +45,18 @@ public record Folder(string Path)
 
     public Folder Subfolder(string subfolderName)
     {
-        var subfolderPath = System.IO.Path.Combine(Path, subfolderName);
+        var folderPath = System.IO.Path.GetFullPath(Path);
+        var subfolderPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(folderPath, subfolderName));
+        var folderPathWithSeparator = folderPath.EndsWith(System.IO.Path.DirectorySeparatorChar)
+            ? folderPath
+            : folderPath + System.IO.Path.DirectorySeparatorChar;
+
+        if (subfolderPath != folderPath &&
+            !subfolderPath.StartsWith(folderPathWithSeparator, OperatingSystem.IsWindows() ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal))
+        {
+            throw new ArgumentException("Subfolder path must stay within the current folder.", nameof(subfolderName));
+        }
+
         return new Folder(subfolderPath);
     }
 
@@ -86,6 +99,19 @@ public record Folder(string Path)
     public void Delete()
     {
         Directory.Delete(Path, recursive: true);
+    }
+
+    public void Clean()
+    {
+        foreach (var file in ImmediateFiles)
+        {
+            System.IO.File.Delete(file.Path);
+        }
+
+        foreach (var subfolder in Subfolders)
+        {
+            subfolder.Delete();
+        }
     }
 
     public IEnumerable<Folder> Subfolders => Directory.GetDirectories(Path).Select(d => new Folder(d));
