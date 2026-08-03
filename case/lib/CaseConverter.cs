@@ -32,8 +32,16 @@ public static class CaseConverter
     public static string ToDot(string[] words) =>
         string.Join(".", words.Select(w => w.ToLower()));
 
-    public static IEnumerable<string> ToAll(string[] words) =>
-        [ToCamel(words), ToPascal(words), ToKebab(words), ToSnake(words), ToUpperSnake(words), ToTrain(words), ToDot(words)];
+    public static string[] ToAll(string[] words) =>
+    [
+        ToCamel(words),
+        ToPascal(words),
+        ToKebab(words),
+        ToSnake(words),
+        ToUpperSnake(words),
+        ToTrain(words),
+        ToDot(words)
+    ];
 
     static string Capitalize(string w) =>
         w.Length == 0 ? w : char.ToUpper(w[0]) + w.Substring(1).ToLower();

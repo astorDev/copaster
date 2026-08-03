@@ -22,4 +22,23 @@ public static class CaseCli
 
         return rootCommand.Parse(args).Invoke();
     }
+
+    public static int Run(string description, Func<string[], IEnumerable<string>> convert, string[] args)
+    {
+        Argument<string> inputArg = new("input") { Description = "The string to convert" };
+        RootCommand rootCommand = new(description)
+        {
+            Arguments = { inputArg }
+        };
+
+        rootCommand.SetAction(parseResult =>
+        {
+            var parsed = CaseConverter.Parse(parseResult.GetValue(inputArg)!);
+            foreach (var result in convert(parsed))
+                Console.WriteLine(result);
+            return 0;
+        });
+
+        return rootCommand.Parse(args).Invoke();
+    }
 }
