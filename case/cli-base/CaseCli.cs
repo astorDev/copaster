@@ -4,7 +4,7 @@ namespace Copaster;
 
 public static class CaseCli
 {
-    public static int Run(string description, Func<string[], string> convert, string[] args)
+    public static int Run(string description, Action<string[]> action, string[] args)
     {
         Argument<string> inputArg = new("input") { Description = "The string to convert" };
         RootCommand rootCommand = new(description)
@@ -14,12 +14,22 @@ public static class CaseCli
 
         rootCommand.SetAction(parseResult =>
         {
-            var parsed = CaseConverter.Parse(parseResult.GetValue(inputArg)!);
-            var result = convert(parsed);
-            Console.WriteLine(result);
+            var input = parseResult.GetValue(inputArg)!;
+            var words = CaseConverter.Parse(input);
+            action(words);
             return 0;
         });
 
-        return rootCommand.Parse(args).Invoke();
+        var parseResult = rootCommand.Parse(args);
+        return parseResult.Invoke();
+    }
+
+    public static int Run(string description, Func<string[], string> convert, string[] args)
+    {
+        return Run(description, words =>
+        {
+            var result = convert(words);
+            Console.WriteLine(result);
+        }, args);
     }
 }

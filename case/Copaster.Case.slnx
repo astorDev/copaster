@@ -4,6 +4,7 @@
     <Project Path="cli-base/Copaster.Case.CliBase.csproj" />
   </Folder>
   <Folder Name="/utils/">
+    <Project Path="all/Copaster.Case.All.csproj" />
     <Project Path="cameled/Copaster.Case.Cameled.csproj" />
     <Project Path="dotted/Copaster.Case.Dotted.csproj" />
     <Project Path="kebabed/Copaster.Case.Kebabed.csproj" />
