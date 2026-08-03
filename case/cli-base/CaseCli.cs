@@ -14,13 +14,18 @@ public static class CaseCli
 
         rootCommand.SetAction(parseResult =>
         {
-            action(CaseConverter.Parse(parseResult.GetValue(inputArg)!));
+            var input = parseResult.GetValue(inputArg)!;
+            var words = CaseConverter.Parse(input);
+            action(words);
             return 0;
         });
 
-        return rootCommand.Parse(args).Invoke();
+        var parseResult = rootCommand.Parse(args);
+        return parseResult.Invoke();
     }
 
-    public static int Run(string description, Func<string[], string> convert, string[] args) =>
-        Run(description, words => Console.WriteLine(convert(words)), args);
+    public static int Run(string description, Func<string[], string> convert, string[] args)
+    {
+        return Run(description, words => Console.WriteLine(convert(words)), args);
+    }
 }
