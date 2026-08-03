@@ -26,6 +26,10 @@ public static class CaseCli
 
     public static int Run(string description, Func<string[], string> convert, string[] args)
     {
-        return Run(description, words => Console.WriteLine(convert(words)), args);
+        return Run(description, words =>
+        {
+            var result = convert(words);
+            Console.WriteLine(result);
+        }, args);
     }
 }
