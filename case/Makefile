@@ -1,9 +1,12 @@
 INPUT ?= InputValue
 PROJECT ?= cameled
-PROJECTS ?= cameled dotted kebabed pascaled snaked trained upsnaked
+PROJECTS ?= all cameled dotted kebabed pascaled snaked trained upsnaked
 
 run:
 	dotnet run --project $(PROJECT) -- $(INPUT)
+
+all-cases:
+	dotnet run --project all -- $(INPUT)
 
 install:
 	dotnet pack $(PROJECT)

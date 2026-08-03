@@ -10,6 +10,7 @@ make pascaled
 make snaked
 make trained
 make upsnaked
+make all-cases
 ```
 
 After installing utilities as a global tool, you should be able to use the util like this:
@@ -19,6 +20,7 @@ cameled "input-value" # returns: inputValue
 pascaled "input-value" # InputValue
 kebabed "InputValue" # input-value
 # ... and so on for each case 
+all-cases "input-value" # returns all cases
 ```
 
 ## Project Structure
@@ -31,3 +33,4 @@ kebabed "InputValue" # input-value
 - upsnaked: Minimal console util for conversion to UPPER_SNAKE_CASE
 - trained: Minimal console util for converstion to Train-Case
 - dotted: Minimal console util for conversion to dot.case
+- all: Minimal console util (`all-cases`) outputting the input string in all cases
