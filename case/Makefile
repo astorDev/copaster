@@ -5,9 +5,6 @@ PROJECTS ?= all cameled dotted kebabed pascaled snaked trained upsnaked
 run:
 	dotnet run --project $(PROJECT) -- $(INPUT)
 
-all-cases:
-	dotnet run --project all -- $(INPUT)
-
 install:
 	dotnet pack $(PROJECT)
 	dotnet tool install --global --add-source $(PROJECT)/bin/Release copaster.case.$(PROJECT)
