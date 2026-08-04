@@ -2,7 +2,7 @@ using Copaster;
 using Copaster.Replace;
 using Microsoft.Extensions.Logging;
 
-public class ReplaceInFolderCommand : Command
+public class ReplaceCommand : Command
 {
     private readonly Option<string> folderOption = new("--folder")
     {
@@ -28,9 +28,9 @@ public class ReplaceInFolderCommand : Command
         Arity = ArgumentArity.ExactlyOne
     };
 
-    private readonly ILogger<ReplaceInFolderCommand> logger;
+    private readonly ILogger<ReplaceCommand> logger;
 
-    public ReplaceInFolderCommand(ILogger<ReplaceInFolderCommand> logger) : base("in", "Replaces text and files and folder names in a folder.")
+    public ReplaceCommand(ILogger<ReplaceCommand> logger) : base("in", "Replaces text and files and folder names in a folder.")
     {
         Add(folderOption);
         Add(allCasesOption);
