@@ -3,14 +3,14 @@
 Set of tools for converting an input string in any format to target format. Try it out without installing with recipes from makefile:
 
 ```sh
-make cameled
-make dotted
-make kebabed
-make pascaled
-make snaked
-make trained
-make upsnaked
-make all-cases
+make run PROJECT=cameled
+make run PROJECT=dotted
+make run PROJECT=kebabed
+make run PROJECT=pascaled
+make run PROJECT=snaked
+make run PROJECT=trained
+make run PROJECT=upsnaked
+make run PROJECT=all
 ```
 
 After installing utilities as a global tool, you should be able to use the util like this:
