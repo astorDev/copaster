@@ -1,0 +1,17 @@
+name: Copaster.Replace.Cli NuGet Publish
+on:
+  push:
+    paths:
+      - 'replace/cli/**'
+      - '.github/workflows/replace-cli-nuget.yml'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Pack & Publish nuget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: astorDev/versy/calver/nuget@main
+        with:
+          project: replace/cli/Copaster.Replace.Cli
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
