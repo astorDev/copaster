@@ -1,4 +1,8 @@
 <Solution>
+    <Folder Name="/magic/" />
+    <Folder Name="/magic/cli/">
+        <Project Path="magic/cli/Copaster.Magic.Cli.csproj" />
+    </Folder>
     <Project Path="replace/cli/Copaster.Replace.Cli.csproj" />
     <Project Path="replace/lib/Copaster.Replace.csproj" />
 </Solution>
