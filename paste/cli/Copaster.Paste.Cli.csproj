@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="NiceShell.Cli" Version="2026.108.104.12" />
-    <PackageReference Include="NiceShell.Logger" Version="2026.108.101.5" />
+    <PackageReference Include="NiceShell.Logger" Version="2026.109.105.7" />
   </ItemGroup>
 
   <ItemGroup>
