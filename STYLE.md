@@ -1,6 +1,24 @@
 # Style Guide
 
-## 1. Don't nest methods; always use variables
+## No method can exceed 10 lines. No class can exceed 50.
+
+If any method you touch is more then 10 lines or if a class you touch exceeds 50 lines, refactor it. 
+
+using the following fixes priority:
+
+1. Use latest C#: primary ctors, lambdas, etc.
+2. Extract Extensions: If a functionality is 
+3. Add Utility Method in dedicated Utility Class.
+
+Passionately remove duplication: You can only do any other refactoring once the method doesn't have any duplications.
+
+Note: For units that already exceeded the limit before you touched them you don't have to make them comply to the limit. BUT you must leave them with less line, then there was before you touched it.
+
+## Never use `else`
+
+All cases of `else` should be refactored to use either early `return`s or `?` operator.
+
+## Don't nest methods; always use variables
 
 Assign intermediate values to variables instead of nesting method calls.
 
@@ -32,7 +50,7 @@ return Run(description, words =>
 }, args);
 ```
 
-## 2. Don't create synthetic private methods; use properly formatted lambdas
+## Don't create synthetic private methods; use properly formatted lambdas
 
 Use a well-formatted multi-line lambda instead of extracting a private method solely to pass it as a callback.
 
