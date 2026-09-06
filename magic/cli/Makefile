@@ -1,4 +1,4 @@
-ARGS ?= . --name John
+ARGS ?= example
 
 run:
 	dotnet run -- $(ARGS)
