@@ -6,7 +6,7 @@ The util accepts single positional argument with relative folder name. For examp
 copaster-magic example <args for copaster.Makefile in the example folder>
 ```
 
-Searches `copaster.Makefile` in the passed folder. Runs rules:
+Searches `copaster.Makefile` in the passed folder. Runs rules (both optional)
 
 - `in-output` in the passed folder e.g. `example`
 - `in-caller` in the folder from which the tool was called i.e. `.`
