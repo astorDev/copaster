@@ -1,0 +1,17 @@
+name: Magic.Cli NuGet
+on:
+  push:
+    paths:
+      - 'magic/cli/**'
+      - '.github/workflows/magic-cli-nuget.yml'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Pack & Publish nuget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: astorDev/versy/calver/nuget@main
+        with:
+          project: magic/cli/Copaster.Magic.Cli
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
