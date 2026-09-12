@@ -1,4 +1,5 @@
 <Solution>
+    <Project Path="magic/play/Copaster.Magic.Playground.csproj" />
     <Project Path="magic/cli/Copaster.Magic.Cli.csproj" />
     <Project Path="paste/cli/Copaster.Paste.Cli.csproj" />
     <Project Path="replace/cli/Copaster.Replace.Cli.csproj" />
