@@ -11,9 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NiceShell.Cli" Version="2026.109.112.14" />
+    <PackageReference Include="NiceShell.Cli" Version="2026.109.112.16" />
     <PackageReference Include="NiceShell.Logger" Version="2026.109.105.7" />
-    <PackageReference Include="Tell.Makefile" Version="2026.109.106.8" />
+    <PackageReference Include="Tell.Makefile" Version="2026.109.112.10" />
   </ItemGroup>
 
   <ItemGroup>

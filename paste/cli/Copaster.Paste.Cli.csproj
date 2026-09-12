@@ -11,11 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NiceShell.Cli" Version="2026.108.104.12" />
-    <PackageReference Include="NiceShell.Logger" Version="2026.109.105.7" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Using Include="System.CommandLine" />
     <Using Include="NiceShell" />
     <Using Include="Copaster" />
@@ -23,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\magic\cli\Copaster.Magic.Cli.csproj" />
+    <ProjectReference Include="..\..\io\lib\Copaster.IO.csproj" />
   </ItemGroup>
 
 </Project>
