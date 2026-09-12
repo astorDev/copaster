@@ -1,4 +1,6 @@
-public class MagicGate : RootCommand
+using Copaster;
+
+public class MagicGate : RootCommand, ICliGate
 {
     public static readonly Argument<string> FolderPathArgument = new ("folder-path")
     {
@@ -6,18 +8,27 @@ public class MagicGate : RootCommand
         Arity = ArgumentArity.ZeroOrOne
     };
 
-    public MagicGate()
+    private readonly RuleRunner ruleRunner;
+
+    public MagicGate(RuleRunner ruleRunner)
     {
         Add(FolderPathArgument);
+        this.ruleRunner = ruleRunner;
     }
 
-    public MagicGateResult Process(string[] args)
+    public CliGateResult Process(string[] args)
     {
         var parseResults = Parse(args);
         var folderPath = parseResults.GetValue(FolderPathArgument);
 
-        return new MagicGateResult(folderPath, () => parseResults.Invoke());
+        if (folderPath == null)
+        {
+            return CliGateResult.Stop(parseResults.Invoke());
+        }
+
+        var magicfile = Magicfile.Load(folderPath);
+        var command = new MagicFolderCommand(folderPath, Directory.GetCurrentDirectory(), magicfile, ruleRunner);
+
+        return CliGateResult.ContinueWith([ command ]);
     }
 }
-
-public record MagicGateResult(string? FolderPath, Func<int> Action);
