@@ -7,3 +7,4 @@ in-output:
 in-caller:
 	echo "Hello, $(NAME). Here are the files in caller"
 	ls
+	echo "I can use output directory ($(OUTPUT)) here"
