@@ -34,3 +34,14 @@ public static class Dot
 {
     public static string Of(string input) => CaseConverter.ToDot(CaseConverter.Parse(input));
 }
+
+public static class UpperDot
+{
+    public static string Of(string input) => CaseConverter.ToUpperDot(CaseConverter.Parse(input));
+}
+
+public static class DotPascal
+{
+    public static string Of(string input) => CaseConverter.ToDotPascal(CaseConverter.Parse(input));
+}
+    
