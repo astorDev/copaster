@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - 'replace/cli/**'
+      - 'case/lib/**'
       - '.github/workflows/replace-cli-nuget.yml'
   workflow_dispatch:
 
