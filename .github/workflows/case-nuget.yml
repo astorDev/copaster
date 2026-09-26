@@ -1,0 +1,17 @@
+name: Copaster.Case NuGet Publish
+on:
+  push:
+    paths:
+      - 'case/lib/**'
+      - '.github/workflows/case-nuget.yml'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Pack & Publish nuget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: astorDev/versy/calver/nuget@main
+        with:
+          project: case/lib/Copaster.Case
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
