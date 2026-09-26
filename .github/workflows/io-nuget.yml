@@ -1,0 +1,17 @@
+name: Copaster.IO NuGet Publish
+on:
+  push:
+    paths:
+      - 'io/lib/**'
+      - '.github/workflows/io-nuget.yml'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    name: Pack & Publish nuget
+    runs-on: ubuntu-latest
+    steps:
+      - uses: astorDev/versy/calver/nuget@main
+        with:
+          project: io/lib/Copaster.IO
+          nuget-api-key: ${{ secrets.NUGET_API_KEY }}
