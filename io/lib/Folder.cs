@@ -4,6 +4,8 @@ namespace Copaster;
 
 public record Folder(string Path)
 {
+    public string FullPath => System.IO.Path.GetFullPath(Path);
+
     public Folder? Parent
     {
         get
@@ -115,6 +117,11 @@ public record Folder(string Path)
     }
 
     public IEnumerable<Folder> Subfolders => Directory.GetDirectories(Path).Select(d => new Folder(d));
+
+    public override string ToString()
+    {
+        return FullPath;
+    }
 }
 
 public record CopyResult
