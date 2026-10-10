@@ -45,4 +45,6 @@ public record File(string Path)
     {
         new File(filePath).UseReplacement(placeholder, replacement).Save();
     }
+
+    public string PathRelativeTo(Folder folder) => System.IO.Path.GetRelativePath(folder.FullPath, FullPath);
 }
