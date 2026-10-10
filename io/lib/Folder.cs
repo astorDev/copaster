@@ -118,6 +118,8 @@ public record Folder(string Path)
 
     public IEnumerable<Folder> Subfolders => Directory.GetDirectories(Path).Select(d => new Folder(d));
 
+    public string PathRelativeTo(Folder folder) => System.IO.Path.GetRelativePath(folder.FullPath, FullPath);
+
     public override string ToString()
     {
         return FullPath;
