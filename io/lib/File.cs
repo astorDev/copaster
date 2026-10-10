@@ -18,6 +18,8 @@ public record File(string Path)
 
     public bool Exists => System.IO.File.Exists(Path);
 
+    public string FullPath => System.IO.Path.GetFullPath(Path);
+
     public File UseContent(string content)
     {
         _content = content;
